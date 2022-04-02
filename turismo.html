@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Actividad Vue 2</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <style>
+            {
+                box-sizing: border-box;
+            }
+            /* Set additional styling options for the columns*/
+            .column {
+            float: left;
+            width: 33%;
+            }
+
+            .row:after {
+            content: "";
+            display: table;
+            clear: both;
+            }
+        </style>
+    </head>
+    <body>
+        <div class = "container" id="app">
+            <h1> Plan de viaje </h1>
+            <h3> Victor Sebastian Martínez Pérez </h3>
+            <h4> A01232474 </h4>
+
+            <div class="row">
+                <div class="column" id="visitados">
+                    <h4>Lugares visitados</h4>
+                    <li v-for="destino in lista_destinos">
+                        <span> {{destino.texto}} </span>
+                    </li>
+                </div>
+
+                <div class="column">
+                    <h4>Lugares a visitar</h4>
+                    <li v-for="deseado in lista_destinos_deseados">
+                        <span> {{deseado.texto}} </span>
+                    </li>
+                </div>
+
+                <div class="column" id="visitados">
+                    <h4> Destino deseado </h4>
+                    <input type="text" v-model="destino_link">
+                    <button class="btn btn-primary" v-on:click="add()" >Añadir a lista</button>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="turismo.js"></script>
+</html>
