@@ -4,11 +4,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Actividad Vue 2</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
-    <style>
-            {
+        <style>
+            /* {
                 box-sizing: border-box;
-            }
+            } */
             /* Set additional styling options for the columns*/
             .column {
             float: left;
@@ -22,34 +21,56 @@
             }
         </style>
     </head>
+
     <body>
-        <div class = "container" id="app">
+        <div class = "container">
             <h1> Plan de viaje </h1>
             <h3> Victor Sebastian Martínez Pérez </h3>
             <h4> A01232474 </h4>
-
+            <br>
             <div class="row">
-                <div class="column" id="visitados">
-                    <h4>Lugares visitados</h4>
-                    <li v-for="destino in lista_destinos">
-                        <span> {{destino.texto}} </span>
-                    </li>
+                <div class="column" id="futuro">
+                    <h4> Destinos que quiero visitar en el futuro</h4>
+                    <button @click="show = !show">
+                        <span v-if="show"> Mostrar lista </span>
+                        <span v-else> Ocultar lista </span>
+                    </button>
+                    <img src="https://cdn.pixabay.com/photo/2019/03/25/20/17/kaohsiung-4081259_1280.jpg" class="w-75" v-if="!show">
+                    <p v-if="!show">China</p>
+                    <img src="https://cdn.pixabay.com/photo/2016/11/29/12/12/architecture-1869398_1280.jpg" class="w-75" v-if="!show">
+                    <p v-if="!show">Japón</p>
+                    <img src="https://cdn.pixabay.com/photo/2014/10/30/00/15/buenos-aires-508790_1280.jpg" class="w-75" v-if="!show">
+                    <p v-if="!show">Argentina</p>
+                    <img src="https://cdn.pixabay.com/photo/2022/01/07/07/13/chicago-6921297_1280.jpg" class="w-75" v-if="!show">
+                    <p v-if="!show">Nueva York</p>
                 </div>
 
-                <div class="column">
-                    <h4>Lugares a visitar</h4>
-                    <li v-for="deseado in lista_destinos_deseados">
-                        <span> {{deseado.texto}} </span>
-                    </li>
+                <div class="column" id="deseados">
+                    <h4>Destinos que visitaré pronto</h4>
+                    <p>Visitaré: {{deseado_link}}</p>
+                    <input placeholder="Ingresar destino (una imagen del lugar se añadirá)" type="text" v-model="deseado_link">
+                    <button @click="add_n_search()" >Añadir a lista</button>
+                    <ul>
+                        <li v-for="(deseado, i) in lista_destinos_deseados">
+                            <p> {{deseado}} </p>
+                            <img :src="image_list[i+1].webformatURL" class="w-75" />
+                        </li>
+                    </ul>
                 </div>
 
                 <div class="column" id="visitados">
-                    <h4> Destino deseado </h4>
-                    <input type="text" v-model="destino_link">
-                    <button class="btn btn-primary" v-on:click="add()" >Añadir a lista</button>
+                    <h4>Lugares ya visitados</h4>
+                    <ul>
+                        <li v-for="destino in lugares_visitados">
+                            <p> {{destino.lugar}} </p>
+                            <img v-bind:src = "destino.img" class="w-75"/>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </body>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="turismo.js"></script>
 </html>
